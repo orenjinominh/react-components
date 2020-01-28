@@ -2,30 +2,38 @@
 class GroceryListItem extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      selected: false
+    };
   }
 
   render() {
+
+    var style = {
+      fontWeight: this.state.selected ? 'bold' : 'normal'
+    };
+
     return (
-      <li onClick={this.onListItemClick}>{this.props.item}</li>
+      <li style={style} onMouseOver={this.onListItemClick.bind(this)} onMouseOut={this.onListItemClick.bind(this)}>{this.props.item}</li>
     );
   }
 
   onListItemClick () {
-    console.log('Clicked!');
+    this.setState({
+      selected: !this.state.selected
+    });
   };
 
 }
 
-var GroceryList = (props) => {
-
-  return (
-    <ul>
-      {props.items.map((item) =>
-        <GroceryListItem item={item} />
-      )}
-    </ul>
-  );
-}
+var GroceryList = (props) => (
+  <ul>
+    {props.items.map((item) =>
+      <GroceryListItem item={item} />
+    )}
+  </ul>
+);
 
 var App = () => (
   <div>
