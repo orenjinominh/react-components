@@ -1,28 +1,31 @@
-var GroceryList = () => (
-  <div>
-    <h2>My Grocery List</h2>
-    <GroceryListItems items={['Bacon', 'Bread', 'Beer']}/>
-  </div>
-);
 
-var GroceryListItems = (props) => {
+var GroceryList = (props) => {
+
   var onListItemClick = (event) => {
-    console.log('Got clicked!');
+    console.log('Clicked!');
   };
-
   return (
     <ul>
-      <li onClick={onListItemClick}>{props.items[0]}</li>
-      <li>{props.items[1]}</li>
-      <li>{props.items[2]}</li>
+      {props.items.map((item, index) =>
+        <li key={index} onClick={onListItemClick}>
+          {item}
+        </li>
+      )}
     </ul>
   );
 }
 
-ReactDOM.render(<GroceryList />, document.getElementById('app'));
+var App = () => (
+  <div>
+    <h2>My Grocery List</h2>
+    <GroceryList items={['Bacon', 'Bread', 'Beer']}/>
+  </div>
+);
+
+
+ReactDOM.render(<App />, document.getElementById('app'));
 
 /*
-
 Create a reusable GroceryListItem component that dynamically renders a given grocery item
  Refactor GroceryList to dynamically render an array of groceryItems, utilizing your new GroceryListItem component
 
